@@ -2,9 +2,9 @@
     position: fixed;
     left:0; bottom:0; right: 0;
     height: 56px;
-    background: #212121;
+    background: #0a0a0a;
     color: white;
-    border-top: solid 0.5px rgba(255,0,0,0.75);
+    border-top: solid 1px rgba(255,0,0,0.5);
     text-align: center;
     z-index: 100;
     overflow: hidden;

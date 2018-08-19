@@ -1,12 +1,9 @@
 /* global zuix */
-
-const PAGE_HOME = 0;
-const PAGE_SEARCH = 1;
-const PAGE_NOTIFICATIONS = 2;
-const PAGE_MESSAGES = 3;
+'use strict';
 
 let mainCover;
 let headerOpacity;
+let detailsPage;
 
 zuix.using('script', './service-worker.js');
 zuix.using('style', '//genielabs.github.io/zkit/css/flex-layout-attribute.min.css');
@@ -64,6 +61,12 @@ window.options = {
     },
     content: {
         css: false
+    },
+    detailsPage: {
+        lazyLoad: false,
+        ready: function() {
+            detailsPage = this;
+        }
     }
 };
 
@@ -75,4 +78,4 @@ function showPage(i) {
 }
 
 // Turn off debug output
-window.zuixNoConsoleOutput = true;
+//window.zuixNoConsoleOutput = true;

@@ -1,0 +1,78 @@
+. {
+    position: fixed;
+    z-index: 200;
+    top: 0; left: 100vh;
+    transition: left .2s ease-in-out;
+    width: 100vw;
+    min-height: 100vh;
+    background: #101010;
+    color: white;
+}
+
+main {
+    position: absolute;
+    top:0;left:0; bottom: 0;
+    width: 100%;
+    padding-bottom: 72px;
+    overflow-y: auto;
+}
+
+footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0; height: 64px;
+    background: #0a0a0a;
+    border-top: solid 1px rgba(255,0,0,0.5);
+}
+
+.cover {
+    background: black no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+}
+
+.cover .background {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background-image: linear-gradient(to bottom, rgba(0,0,0, 0.25), transparent 20%, transparent 80%, rgba(0,0,0, 0.25) 90%);
+}
+.cover button {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 10;
+    border: 0;
+    background: transparent;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+.cover button i {
+    color: white;
+    font-weight: 700;
+    font-size: 160%;
+    line-height: 48px;
+}
+.cover h1 {
+    z-index: 10;
+    margin: 0;
+    padding: 16px;
+    font-size: 160%;
+    text-shadow:
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+
+[data-ui-field="overview"] {
+    font-size: 120%;
+    line-height: 160%;
+    padding: 16px;
+    margin-top: 8px;
+    color: whitesmoke;
+}

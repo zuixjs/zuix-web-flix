@@ -21,6 +21,10 @@ zuix.controller(function(cp) {
                         const item = data.results[0];
                         const posterUrl = 'https://image.tmdb.org/t/p/w154' + item.poster_path;
                         cp.view().css('background-image', 'url("' + posterUrl + '")');
+                        // add on click listener to open the details page
+                        cp.view().on('click', function(){
+                            if (detailsPage) detailsPage.show(item);
+                        });
                     }
                 }
             });
