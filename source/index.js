@@ -93,7 +93,7 @@ function showPage(i) {
             .css('background-color', 'rgba(33,33,33,1)');
     }
     // hide details page if open
-    if (detailsPage) {
+    if (detailsPage && detailsPage.view().style['display'] !== 'none') {
         detailsPage.hide();
     } else {
         // show page
