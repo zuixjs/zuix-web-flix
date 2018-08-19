@@ -7,14 +7,14 @@ zuix.controller(function(cp) {
 
     cp.create = function() {
         cover = cp.view('.cover');
-        // public method to set portrait and landscape images
-        cp.expose('pictures', setPictures);
-        // expose translate method for parallax effect
-        cp.expose('translate', setOffsetY);
         // detect orientation change
         const orientation = window.matchMedia('(orientation: portrait)');
         if (orientation.matches) isPortrait = true;
         orientation.addListener(orientationChange);
+        // public method to set portrait and landscape images
+        cp.expose('pictures', setPictures);
+        // expose translate method for parallax effect
+        cp.expose('translate', setOffsetY);
     };
     cp.destroy = function() {
         window.matchMedia('(orientation: portrait)').removeListener(orientationChange);

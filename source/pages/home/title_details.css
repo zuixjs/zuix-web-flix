@@ -9,6 +9,37 @@
     color: white;
 }
 
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0; height: 56px;
+    z-index: 200;
+}
+header button {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 10;
+    border: 0;
+    background: transparent;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+header button i {
+    color: white;
+    font-weight: 700;
+    font-size: 160%;
+    line-height: 48px;
+}
+header h1 {
+    position: absolute;
+    top: 12px;
+    left: 64px;
+    margin: 0;
+    font-size: 180%;
+}
+
 main {
     position: absolute;
     top:0;left:0; bottom: 0;
@@ -37,24 +68,6 @@ footer {
     position: absolute;
     left: 0; right: 0; top: 0; bottom: 0;
     background-image: linear-gradient(to bottom, rgba(0,0,0, 0.25), transparent 20%, transparent 80%, rgba(0,0,0, 0.25) 90%);
-}
-.cover button {
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 10;
-    border: 0;
-    background: transparent;
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    text-align: center;
-    vertical-align: middle;
-}
-.cover button i {
-    color: white;
-    font-weight: 700;
-    font-size: 160%;
-    line-height: 48px;
 }
 .cover h1 {
     z-index: 10;

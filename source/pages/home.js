@@ -17,6 +17,7 @@ zuix.controller(function(cp) {
             // refresh cover pictures
             if (coverItem) setCoverItem(coverItem);
         });
+        // expose public methods
         cp.expose('cover', setCoverItem);
         cp.expose('sync', syncWithScroll);
     };

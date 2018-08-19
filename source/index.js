@@ -43,7 +43,7 @@ window.options = {
                 this.on('click', function() {
                     buttons.removeClass('active');
                     this.addClass('active');
-                    showPage(i);
+                    window.location.href = '#'+this.attr('ref');
                 });
             });
         }
@@ -63,18 +63,44 @@ window.options = {
     }
 };
 
+// site navigation
+window.onhashchange = function() {
+    if (window.location.hash.length > 0) {
+        switch (window.location.hash) {
+            case '#home':
+                showPage(0);
+                break;
+            case '#search':
+                showPage(1);
+                break;
+            case '#notifications':
+                showPage(2);
+                break;
+            case '#about':
+                showPage(3);
+                break;
+        }
+    } else showPage(0);
+};
+
 function showPage(i) {
     currentPage = i;
+    // sync header bar transparency
     if (currentPage == 0) {
         mainPage.sync();
     } else {
         zuix.field('header-bar')
             .css('background-color', 'rgba(33,33,33,1)');
     }
-    // show page
-    zuix.field('pages')
-        .children().hide()
-        .eq(i).show();
+    // hide details page if open
+    if (detailsPage) {
+        detailsPage.hide();
+    } else {
+        // show page
+        zuix.field('pages')
+            .children().hide()
+            .eq(i).show();
+    }
 }
 
 // Turn off debug output
