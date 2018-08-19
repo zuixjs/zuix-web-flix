@@ -16,13 +16,12 @@ zuix.controller(function(cp) {
         setTimeout(function(){
             cp.view().css('left', 0);
         }, 10);
-        const backdropUrl = 'url("https://image.tmdb.org/t/p/w1280'+item.backdrop_path+'")';
+        const backdropUrl = 'url("'+item.backdrop_path+'")';
         cp.field('cover')
             .css('background-image', backdropUrl);
         cp.field('title').html(item.title || item.original_name);
         cp.field('overview').html(item.overview);
         cp.field('vote').html(item.vote_average);
-console.log(item);
     }
 
     function hidePage() {

@@ -60,10 +60,14 @@ button.flat-btn i {
 .movie {
     padding: 4px;
 }
-.movie a.item {
+.movie span.item {
     display: inline-block;
     width: 154px;
     height: 231px;
     border: solid 1px rgba(255,255,255,.1);
     background-image: linear-gradient(rgba(0,0,0,0.15) 0, transparent 48px, transparent 40%, black 99%);
+}
+.movie span.item:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }

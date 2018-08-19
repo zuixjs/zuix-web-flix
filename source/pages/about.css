@@ -1,11 +1,17 @@
-.message {
+. {
+    color: white;
+    padding: 24px;
+    font-size: 140%;
+    margin-top: 64px;
+    margin-bottom: 64px;
+}
+
+h1 {
     color: darkgrey;
-    min-height: 100vh;
-    width: 100vw;
     font-size: 200%;
 }
-.message i {
-    margin-left: 16px;
-    color: darkgrey;
-    font-size: 150%;
+
+a, a:visited, a:hover {
+    color: lime;
+    text-decoration: none;
 }

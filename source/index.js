@@ -1,6 +1,7 @@
 /* global zuix */
 'use strict';
 
+let currentPage;
 let mainPage;
 let detailsPage;
 
@@ -19,8 +20,8 @@ window.options = {
             mainPage = this.cover({
                 "vote_average":7.2,
                 "title":"Total Recall",
-                "poster_path":"\/tWBo7aZk3I1dLxmMj7ZJcN8uke5.jpg",
-                "backdrop_path":"\/orFQbyZ6g7kPFaJXmgty0M88wJ0.jpg",
+                "poster_path":"images\/total_recall_portrait.jpg",
+                "backdrop_path":"images\/total_recall_landscape.jpg",
                 "overview":"Welcome to Rekall, the company that can turn your dreams into real memories. For a factory worker named Douglas Quaid, even though he's got a beautiful wife who he loves, the mind-trip sounds like the perfect vacation from his frustrating life - real memories of life as a super-spy might be just what he needs. But when the procedure goes horribly wrong, Quaid becomes a hunted man. Finding himself on the run from the police - controlled by Chancellor Cohaagen, the leader of the free world - Quaid teams up with a rebel fighter to find the head of the underground resistance and stop Cohaagen. The line between fantasy and reality gets blurred and the fate of his world hangs in the balance as Quaid discovers his true identity, his true love, and his true fate.",
                 "release_date":"2012-08-02",
                 "trailer": "https://youtube.com/watch?v=GljhR5rk5eY"
@@ -51,16 +52,25 @@ window.options = {
         on: {
             'scroll:change': function(e, data) {
                 // synchronize/animate main cover with scroll
-                if (mainPage) mainPage.sync(data);
+                if (currentPage == 0 && mainPage) {
+                    mainPage.sync(data);
+                }
             }
         }
     },
-    content: {
+    content_no_css: {
         css: false
     }
 };
 
 function showPage(i) {
+    currentPage = i;
+    if (currentPage == 0) {
+        mainPage.sync();
+    } else {
+        zuix.field('header-bar')
+            .css('background-color', 'rgba(33,33,33,1)');
+    }
     // show page
     zuix.field('pages')
         .children().hide()

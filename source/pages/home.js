@@ -2,7 +2,7 @@
 zuix.controller(function(cp) {
     let coverItem;
     let mainCover;
-    let headerOpacity;
+    let headerOpacity = 0;
 
     cp.create = function() {
         // register button handlers
@@ -13,10 +13,9 @@ zuix.controller(function(cp) {
         // hide on startup
         cp.view().hide();
         zuix.context(cp.field('main-cover'), function() {
-            mainCover = this.pictures(
-                'images/total_recall_portrait.jpg',
-                'images/total_recall_landscape.jpg'
-            );
+            mainCover = this;
+            // refresh cover pictures
+            if (coverItem) setCoverItem(coverItem);
         });
         cp.expose('cover', setCoverItem);
         cp.expose('sync', syncWithScroll);
@@ -24,6 +23,12 @@ zuix.controller(function(cp) {
 
     function setCoverItem(item) {
         coverItem = item;
+        if (mainCover) {
+            mainCover.pictures(
+                coverItem.poster_path,
+                coverItem.backdrop_path
+            );
+        }
         return cp.context;
     }
 
@@ -32,6 +37,11 @@ zuix.controller(function(cp) {
     }
 
     function syncWithScroll(data) {
+        if (data == null) {
+            zuix.field('header-bar')
+                .css('background-color', 'rgba(33,33,33,' + headerOpacity + ')');
+            return;
+        }
         let opacity = 1;
         if (data.event === 'hit-top') {
             opacity = 0;
