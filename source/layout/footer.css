@@ -1,0 +1,44 @@
+. {
+    position: fixed;
+    left:0; bottom:0; right: 0;
+    height: 56px;
+    background: #212121;
+    color: white;
+    border-top: solid 0.5px rgba(255,0,0,0.75);
+    text-align: center;
+    z-index: 100;
+    overflow: hidden;
+}
+
+button {
+    padding: 12px;
+    max-height: 56px;
+    margin-left: 8px;
+    margin-right: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: rgba(0,0,0,0.5);
+    -webkit-transition: all .3s; /* Safari */
+    transition: all .3s;
+}
+button:hover {
+    background: rgba(255,255,255,0.25);
+}
+button:focus {outline:0;}
+button i {
+    color: #7c7c7c;
+    font-size: 32px !important;
+}
+button:hover i, .active i {
+    color: white;
+}
+.active {
+    transform: scale(1.2);
+    text-shadow:
+            1px 1px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}

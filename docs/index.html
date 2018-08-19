@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>HTML PWA</title>
+  <meta name="description" content="HTML Progressive Web App made with zUIx.js">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Progressive Web App -->
+  <meta name="theme-color" content="#212121">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="images/icons/desktop/android-chrome-192x192.png">
+  <link rel="icon" sizes="512x512" href="images/icons/desktop/android-chrome-512x512.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="A zUIx website">
+  <link rel="apple-touch-icon-precomposed" href="images/icons/desktop/apple-touch-icon.png">
+  <link rel="mask-icon" href="images/icons/desktop/safari-pinned-tab.svg" color="#5bbad5">
+
+  <!-- Tile color for Windows -->
+  <meta name="msapplication-TileImage" content="images/icons/desktop/mstile-150x150.png">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icons/desktop/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/icons/desktop/favicon-16x16.png">
+
+  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+  <!--
+  <link rel="canonical" href="http://www.example.com/">
+  -->
+
+  <!-- Material Design Icons -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- import zUIx library (v 0.4.9-54) -->
+  <script src="js/zuix.min.js"></script>
+  <script src="app.bundle.js"></script>
+
+  <!-- main app script -->
+  <script src="index.js" defer></script>
+
+</head>
+<!-- load the 'header_auto_hide' on the body -->
+<body data-ui-load="@lib/controllers/scroll_helper" data-ui-options="options.pageScroll" data-ui-lazyload="scroll">
+
+<!-- The header with profile icon button for opening the drawer layout (side menu panel) -->
+<header data-ui-include="layout/header"
+        data-ui-field="header-bar"></header>
+
+<main data-ui-field="pages">
+
+  <!-- HOME -->
+  <section data-ui-include="content/pages/home"
+           data-ui-options="options.mainPage"></section>
+
+  <!-- SEARCH -->
+  <section data-ui-include="content/pages/search"></section>
+
+  <!-- NOTIFICATIONS -->
+  <section data-ui-include="content/pages/notifications"></section>
+
+  <!-- MESSAGES -->
+  <section data-ui-include="content/pages/messages"></section>
+
+</main>
+
+<!-- The footer with toolbar buttons -->
+<footer data-ui-include="layout/footer"
+        data-ui-options="options.footerBar"
+        data-ui-field="footer-bar"></footer>
+
+<noscript>
+  Turn on JavaScript to access this site content.
+</noscript>
+
+</body>
+</html>

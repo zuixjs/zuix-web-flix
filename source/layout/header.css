@@ -1,0 +1,27 @@
+. {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:auto;
+  z-index: 100;
+}
+
+.header {
+  height: 56px;
+  max-height: 56px;
+}
+
+.logo {
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 220%;
+  font-weight: 800;
+  color: #d00;
+  text-shadow:
+          1px 1px 0 #600,
+          -1px -1px 0 #600,
+          1px -1px 0 #600,
+          -1px 1px 0 #600,
+          1px 1px 0 #600;
+}

@@ -1,0 +1,57 @@
+. {
+    /* temporary hack to test page scroll */
+    /* height: 500vh; */
+    color: white;
+    padding-bottom: 96px;
+}
+
+h1 {
+    font-size: 120%;
+    text-align: left;
+    margin-top: 36px;
+    margin-left: 12px;
+}
+
+.content {
+    position: absolute;
+    top: 0; left: 0;
+    padding-bottom: 56px;
+    width: 100vw;
+    height: 90vh;
+    background-image: linear-gradient(rgba(0,0,0,0.15) 0, transparent 48px, transparent 40%, black 99%);
+}
+
+.categories, .options {
+    padding: 8px;
+}
+
+.options i {
+    font-size: 36px
+}
+
+button {
+    padding-left: 6px;
+    padding-right: 16px;
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 38px;
+}
+button div i {
+    margin-right: 6px;
+}
+
+.gallery {
+    width: 100%;
+    height: 231px;
+}
+
+.movie {
+    padding: 4px;
+}
+.movie a.item {
+    display: inline-block;
+    width: 154px;
+    height: 231px;
+    border: solid 1px rgba(255,255,255,.1);
+    background-image: linear-gradient(rgba(0,0,0,0.15) 0, transparent 48px, transparent 40%, black 99%);
+}
