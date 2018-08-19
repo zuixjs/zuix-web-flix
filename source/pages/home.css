@@ -3,6 +3,7 @@
     /* height: 500vh; */
     color: white;
     padding-bottom: 96px;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -18,15 +19,11 @@ h1 {
     padding-bottom: 56px;
     width: 100vw;
     height: 90vh;
-    background-image: linear-gradient(rgba(0,0,0,0.15) 0, transparent 48px, transparent 40%, black 99%);
+    background-image: linear-gradient(to bottom, rgba(0,0,0, 0.15), transparent 20%, transparent 70%, rgba(0,0,0, 0.5) 80%);
 }
 
 .categories, .options {
     padding: 8px;
-}
-
-.options i {
-    font-size: 36px
 }
 
 button {
@@ -38,6 +35,21 @@ button {
 }
 button div i {
     margin-right: 6px;
+}
+
+button.flat-btn {
+    border: 0;
+    background: transparent;
+    height: 56px;
+    width: 56px;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+button.flat-btn i {
+    color: white;
+    font-size: 36px;
+    line-height: 56px;
 }
 
 .gallery {

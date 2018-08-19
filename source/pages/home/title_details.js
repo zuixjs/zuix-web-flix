@@ -21,6 +21,8 @@ zuix.controller(function(cp) {
             .css('background-image', backdropUrl);
         cp.field('title').html(item.title || item.original_name);
         cp.field('overview').html(item.overview);
+        cp.field('vote').html(item.vote_average);
+console.log(item);
     }
 
     function hidePage() {

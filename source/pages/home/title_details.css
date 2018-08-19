@@ -19,7 +19,7 @@ main {
 
 footer {
     position: fixed;
-    bottom: 0; left: 0; right: 0; height: 64px;
+    bottom: 0; left: 0; right: 0; height: 56px;
     background: #0a0a0a;
     border-top: solid 1px rgba(255,0,0,0.5);
 }
@@ -74,5 +74,13 @@ footer {
     line-height: 160%;
     padding: 16px;
     margin-top: 8px;
+    margin-bottom: 0;
     color: whitesmoke;
+}
+
+h2 {
+    color: darkgrey;
+}
+[data-ui-field="vote"] {
+    color: white;
 }

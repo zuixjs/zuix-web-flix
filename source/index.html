@@ -7,7 +7,7 @@
   <title>HTML PWA</title>
   <meta name="description" content="HTML Progressive Web App made with zUIx.js">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
@@ -62,17 +62,17 @@
 <main data-ui-field="pages">
 
   <!-- HOME -->
-  <section data-ui-include="content/pages/home"
+  <section data-ui-load="pages/home"
            data-ui-options="options.mainPage"></section>
 
   <!-- SEARCH -->
-  <section data-ui-include="content/pages/search"></section>
+  <section data-ui-include="pages/search"></section>
 
   <!-- NOTIFICATIONS -->
-  <section data-ui-include="content/pages/notifications"></section>
+  <section data-ui-include="pages/notifications"></section>
 
   <!-- MESSAGES -->
-  <section data-ui-include="content/pages/messages"></section>
+  <section data-ui-include="pages/about"></section>
 
 </main>
 

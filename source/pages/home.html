@@ -1,24 +1,30 @@
-<div data-ui-load="components/main_cover"
-     data-ui-options="options.mainCover"
+<div data-ui-load="pages/home/main_cover"
+     data-ui-field="main-cover"
      style="height: 90vh"></div>
 
 <div class="content" layout="column bottom-center">
     <div class="categories" layout="row center-spread">
         Bestseller
         &bull;
-        Canadian
+        United States
         &bull;
-        Romantic
+        Sci-fi
+        &bull;
+        Action
     </div>
     <div class="options" layout="row center-spread">
-        <i class="material-icons">add</i>
-        <button>
+        <button data-ui-field="add-btn" class="flat-btn">
+            <i class="material-icons">add</i>
+        </button>
+        <button data-ui-field="watch-btn">
             <div layout="row center-left">
                 <i class="material-icons">play_arrow</i>
                 Watch
             </div>
         </button>
-        <i class="material-icons">info_outline</i>
+        <button data-ui-field="details-btn" class="flat-btn">
+            <i class="material-icons">info_outline</i>
+        </button>
     </div>
 </div>
 
@@ -36,7 +42,7 @@
         <a title="Push" data-ui-lazyload="true" data-ui-load="controllers/movie_db" class="item"><!-- no-view --></a>
     </div>
     <div class="movie">
-        <a title="Jupiter" data-ui-lazyload="true" data-ui-load="controllers/movie_db" class="item"><!-- no-view --></a>
+        <a title="Jupiter Ascending" data-ui-lazyload="true" data-ui-load="controllers/movie_db" class="item"><!-- no-view --></a>
     </div>
     <div class="movie">
         <a title="PayCheck" data-ui-lazyload="true" data-ui-load="controllers/movie_db" class="item"><!-- no-view --></a>
@@ -187,5 +193,5 @@
     </div>
 </div>
 
-<div data-ui-load="content/pages/home/title_details"
+<div data-ui-load="pages/home/title_details"
      data-ui-options="options.detailsPage"></div>
