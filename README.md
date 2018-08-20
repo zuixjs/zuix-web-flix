@@ -35,31 +35,35 @@ If you don't want to use the integrated web server, you can setup any other web 
 
 ## Site structure in brief
 
-The main file is the `index.html`. This file includes some layout bits that are located in the `./layout` folder and the main application pages that are located in the `./pages` folder.
+The main file is the `index.html`. This file includes some layout bits that are located in the `layout/` folder and the main application pages that are located in the `pages/` folder.
 
 ```
 ./source/
-  ./layout/
+   layout/
       footer.css
       footer.html
       header.css
       header.html
-  ./pages/
+   pages/
       about.css
       about.html
-      home/ (folder)
       home.css
       home.html
       home.js
+      home/ (folder with other files referenced in home.html/js)
       notifications.css
       notifications.html
       search.css
       search.html
+   shared/
+      (not used yet)
 ```
 
-A simple page is defined by the `.css` and `.html` files. A page may also require some bits of *JavaScript* in which case also a `.js` file with the same base name is present.
+A simple page is defined by the `.css` and `.html` files. A page might also require some bits of *JavaScript* in which case also a `.js` file with the same base name is present.
 
-A complete example is the `./pages/home` page which has a `.js` file (*controller*) and also loads some sub-components that are located in the `./pages/home/` folder.
+A complete example is the `pages/home` page which has a `.js` file (*controller*) and also loads some *local* bits that are placed in the `pages/home/` folder.
+
+The `shared/` folder contains indeed bits that are *shared* across the whole application and that are usually referenced by difference pages.
 
 As you can see in the `index.html` file those pages and layout bits are loaded using some special tag attributes that are `data-ui-include` (to load simple content pages) and `data-ui-load` to load pages or components that also have a JavaScript controller.
 
