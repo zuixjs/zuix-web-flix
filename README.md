@@ -66,10 +66,9 @@ As you can see in the `index.html` file those pages and layout bits are loaded u
 **index.html** (main body)
 ```html
 <!-- The header with title/logo -->
-<header data-ui-include="layout/header"
-        data-ui-field="header-bar"></header>
+<header data-ui-include="layout/header"></header>
 
-<main data-ui-field="pages">
+<main>
 
   <!-- HOME -->
   <section data-ui-load="pages/home"
@@ -88,8 +87,7 @@ As you can see in the `index.html` file those pages and layout bits are loaded u
 
 <!-- The footer with toolbar buttons -->
 <footer data-ui-include="layout/footer"
-        data-ui-options="options.footerBar"
-        data-ui-field="footer-bar"></footer>
+        data-ui-options="options.footerBar"></footer>
 ```
 
 For a deeper insight on using these special attributes for component-based developemnt with **zUIx.js** see related link at the bottom of this page.
