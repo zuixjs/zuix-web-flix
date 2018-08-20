@@ -2,13 +2,13 @@
 
 A Progressive Web App template inspired by NetFlix mobile app.
 
-This template is built on just HTML, JavaScript and CSS so that it can be eventually integrated with your favourite development enviroment and build tools.
+This template is built with just HTML, JavaScript and CSS so that it can be eventually integrated with your favourite development environment and build tools.
 
 ## Features
 
-- NetFlix app inspired design
-- Component-based web development with zUIx.js
-- In-Browser bundler to pack all resources in a single file and boost-up loading speed
+- Design inspired to NetFlix mobile app
+- Modular and component-based structure using zUIx.js
+- In-browser bundler: can pack all resources in a single file and boost-up loading speed
 - PWA LightHouse score 99/100
 
 ![LightHouse Report](https://genielabs.github.io/zuix-web-flix/images/lighthouse-report.png)
@@ -24,50 +24,79 @@ The **./source** folder contains the *development* version of the website, while
 ## Basic usage
 
 If you have *Node.js* installed, for a quick setup you can use the integrated web server which will serve files from the *./source* folder.
-Install the develppment dependencies with `npm install` and then start the web server:
+Install the development dependencies with `npm install` and then start the web server:
 
 ```
 npm start
 ```
 
-If you don't want to use *Node.js* and you already have a web server, create a new host with the root path pointing to the *./source* folder.
+If you don't want to use the integrated web server, you can setup any other web server by creating a new host with the root path pointing to the *./source* folder.
 
 
 ## Site structure in brief
 
-The main file is the `index.html`. This file includes some layout bits that are stored in the `./layout` folder and the main application pages that are stored in the `./pages` folder.
+The main file is the `index.html`. This file includes some layout bits that are located in the `./layout` folder and the main application pages that are located in the `./pages` folder.
 
 ```
 ./source/
   ./layout/
-     footer.css
-     footer.html
-     header.css
-     header.html
+      footer.css
+      footer.html
+      header.css
+      header.html
   ./pages/
-     about.css
-     about.html
-     home/ (folder)
-     home.css
-     home.html
-     home.js
-     notifications.css
-     notifications.html
-     search.css
-     search.html
+      about.css
+      about.html
+      home/ (folder)
+      home.css
+      home.html
+      home.js
+      notifications.css
+      notifications.html
+      search.css
+      search.html
 ```
 
 A simple page is defined by the `.css` and `.html` files. A page may also require some bits of *JavaScript* in which case also a `.js` file with the same base name is present.
 
-A complete example is the `./pages/home` page which has a `.js` file and also loads some sub-components that are located in the `./pages/home/` folder.
+A complete example is the `./pages/home` page which has a `.js` file (*controller*) and also loads some sub-components that are located in the `./pages/home/` folder.
 
 As you can see in the `index.html` file those pages and layout bits are loaded using some special tag attributes that are `data-ui-include` (to load simple content pages) and `data-ui-load` to load pages or components that also have a JavaScript controller.
 
-Read the documentation linked at the end of this text for further information about component-based development with **zUIx.js**.
+**index.html** (main body)
+```html
+<!-- The header with title/logo -->
+<header data-ui-include="layout/header"
+        data-ui-field="header-bar"></header>
+
+<main data-ui-field="pages">
+
+  <!-- HOME -->
+  <section data-ui-load="pages/home"
+           data-ui-options="options.mainPage"></section>
+
+  <!-- SEARCH -->
+  <section data-ui-include="pages/search"></section>
+
+  <!-- NOTIFICATIONS -->
+  <section data-ui-include="pages/notifications"></section>
+
+  <!-- ABOUT -->
+  <section data-ui-include="pages/about" layout="column top-center"></section>
+
+</main>
+
+<!-- The footer with toolbar buttons -->
+<footer data-ui-include="layout/footer"
+        data-ui-options="options.footerBar"
+        data-ui-field="footer-bar"></footer>
+```
+
+For a deeper insight on using these special attributes for component-based developemnt with **zUIx.js** see related link at the bottom of this page.
 
 ### Movie lists
 
-The list of movies are located in the `./pages/home/` folder and consists of a static list of items to which is bound a *controller* that carry the duty of querying the [The Movie Database](https://www.themoviedb.org/) to fetch each title data and images.
+The list of movies shown in the main page are located in the `./pages/home/` folder and consists of a static list of items to which is bound a *controller* that carry the duty of querying the [The Movie Database](https://www.themoviedb.org/) to fetch data and images of each title.
 
 Each *movie item* is defined as follow:
 ```
@@ -75,9 +104,9 @@ Each *movie item* is defined as follow:
   <a title="Total recall" data-ui-load="controllers/movie_db" data-ui-lazyload="true" class="item"><!-- no-view --></a>
 </div>
 ```
-The `data-ui-load="controllers/movie_db"` will make *zUIx.js* load the `./controllers/movie_db.js` on the element. This contoller will read the `title` attribute of the item and fetch the movie data using *TMDB API*.
+The `data-ui-load="controllers/movie_db"` attribute will make *zUIx.js* to load the `./controllers/movie_db.js` on the element. This contoller will read the `title` attribute of the element and fetch the movie data using *TheMovieDB API*.
 
-To make this work you must obtain an API key and put the value at the beginning of the `./controllers/movie_db.js` file:
+To make this work on your local copy, you must obtain an API key and put the value at the beginning of the `./controllers/movie_db.js` file:
 
 ```javascript
 // TODO: get your free TMDB API key from https://themoviedb.org
@@ -105,7 +134,7 @@ If you have more questions about how to use this template do not esitate to [fil
 
 ## Debugging
 
-To enable verbose debugging information comment in the last line in the `index.js` file:
+To enable verbose debugging information in the browser console, comment out the last line in the `index.js` file as shown below:
 
 ``` javascript
 // Turn off debug output
@@ -115,9 +144,9 @@ To enable verbose debugging information comment in the last line in the `index.j
 
 ## Bundling
 
-Bundling is the process of collecting all resources used in a page and then compiling them into a single, optimized file.
+Bundling is the process of collecting all resources used in a page and then compiling them into a single and optimized file.
 
-This will drastically narrow down the number of network requests the browser will make to complete the page loading resulting in a faster startup.
+This will drastically narrow down the number of network requests the browser will make to complete the page loading, thus resulting in a faster startup.
 
 There are actually two way of doing this:
 
@@ -171,7 +200,7 @@ zuix.componentize()
 zuix.saveBundle()
 ```
 
-Also external JavaScript libraries and CSS files can be included in the page bundle. In order to achieve this, remove the `<script src="..."></script>` or `<link rel="stylesheet">` and use the method `zuix.using(...)` instead to load the script/css.
+Also external JavaScript libraries and CSS files can be included in the page bundle. In order to achieve this, remove the `<script src="..."></script>` or `<link rel="stylesheet">` and instead use the method `zuix.using(...)` to load the script/css.
 
 ```javascript
 // Loading a .css style
