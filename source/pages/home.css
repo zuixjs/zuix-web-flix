@@ -54,7 +54,7 @@ button.flat-btn i {
 
 .gallery {
     width: 100%;
-    height: 231px;
+    height: 180px;
 }
 
 .movie {
@@ -62,12 +62,22 @@ button.flat-btn i {
 }
 .movie span.item {
     display: inline-block;
-    width: 154px;
-    height: 231px;
+    width: 120px;
+    height: 180px;
     border: solid 1px rgba(255,255,255,.1);
     background-image: linear-gradient(rgba(0,0,0,0.15) 0, transparent 48px, transparent 40%, black 99%);
 }
 .movie span.item:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+@media only screen and (min-device-width : 720px) {
+    .gallery {
+        height: 231px;
+    }
+    .movie span.item {
+        width: 154px;
+        height: 231px;
+    }
 }
