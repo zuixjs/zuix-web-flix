@@ -106,6 +106,6 @@ function showPage(i) {
 // increase lazy-load hit area up to
 // 300px off the viewport boundaries
 // (circa 3 movie items ahead)
-zuix.lazyLoad(true, -500);
+//zuix.lazyLoad(true, -500);
 // Turn off debug output
 window.zuixNoConsoleOutput = true;
