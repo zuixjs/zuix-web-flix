@@ -129,6 +129,19 @@ You can see how these methods are implemented in the `./pages/home.js` file and 
 The *details page* is available as the global object `detailsPage` and it has two methods: `show` and `hide`.
 The first method requires the movie item data as argument. You can see how it is used in the `./controllers/movie_db.js` file to open a movie detail when the preview image is tapped.
 
+### About the @lib prefix
+
+The special *@lib* prefix is used with the `data-ui-include` and `data-ui-load` attribute to load components from a shared location that by default will point to the [zKit](https://genielabs.github.io/zkit/) components library.
+This path is resolved to `https://genielabs.github.io/zkit/lib/` but can also be customized to point to a different location:
+
+```javascript
+zuix.store('config', {
+    libraryPath: 'https://my.shared.components.io/lib/'
+});
+```
+
+You can so create your own shared component library to use across all of your websites.
+
 ### Further implementation details
 
 If you have more questions about how to use this template do not esitate to [file an issue](https://github.com/genielabs/zuix-web-flix/issues).
@@ -221,6 +234,7 @@ Place the *using* commands preferably at the top of `index.js`. You can remove f
 
 # Further reading
 
-- [zUIx.js](https://genielabs.github.io/zuix)
+- [zUIx.js](https://genielabs.github.io/zuix/)
+- [zKit](https://genielabs.github.io/zkit/)
 - [Progressive Web App](https://developers.google.com/web/progressive-web-apps)
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers)
