@@ -9,7 +9,7 @@ This template is built with just HTML, JavaScript and CSS so that it can be even
 - Design inspired to NetFlix mobile app
 - Modular and component-based structure using zUIx.js
 - In-browser bundler: can pack all resources in a single file and boost-up loading speed
-- PWA LightHouse score 99/100
+- PWA LightHouse score 100/100 (!)
 
 ![LightHouse Report](https://genielabs.github.io/zuix-web-flix/images/lighthouse-report.png)
 
