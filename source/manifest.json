@@ -1,9 +1,9 @@
 {
-  "name": "HTML Progressive Web App",
-  "short_name": "HTML PWA",
+  "name": "WebFlix Progressive Web App",
+  "short_name": "WebFlix",
   "description": "A very cool web app powered by zUIx.js",
-  "theme_color": "#212121",
-  "background_color": "#212121",
+  "theme_color": "#121212",
+  "background_color": "#1a1a1a",
   "display": "standalone",
   "Scope": "./",
   "start_url": "index.html",

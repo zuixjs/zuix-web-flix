@@ -40,7 +40,7 @@ zuix.controller(function(cp) {
     function syncWithScroll(data) {
         if (data == null) {
             zuix.field('header-bar')
-                .css('background-color', 'rgba(33,33,33,' + headerOpacity + ')');
+                .css('background-color', 'rgba(18,18,18,' + headerOpacity + ')');
             return;
         }
         let opacity = 1;
@@ -51,7 +51,7 @@ zuix.controller(function(cp) {
         }
         if (opacity !== headerOpacity) {
             zuix.field('header-bar')
-                .css('background-color', 'rgba(33,33,33,' + opacity + ')');
+                .css('background-color', 'rgba(18,18,18,' + opacity + ')');
             // cover parallax effect
             if (mainCover) mainCover.translate(data.info);
             headerOpacity = opacity;

@@ -1,17 +1,15 @@
 . {
     color: white;
     padding: 24px;
-    font-size: 140%;
     margin-top: 64px;
     margin-bottom: 64px;
 }
 
 h1 {
     color: darkgrey;
-    font-size: 200%;
 }
 
 a, a:visited, a:hover {
-    color: lime;
+    color: darkorange;
     text-decoration: none;
 }

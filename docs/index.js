@@ -9,10 +9,6 @@ zuix.using('script', './service-worker.js');
 zuix.using('style', '//genielabs.github.io/zkit/css/flex-layout-attribute.min.css');
 zuix.using('style', './index.css');
 
-zuix.$.find('.profile').on('click', function() {
-    if (drawerLayout) drawerLayout.open();
-});
-
 window.options = {
     mainPage: {
         lazyLoad: false,
@@ -107,5 +103,6 @@ function showPage(i) {
 // 300px off the viewport boundaries
 // (circa 3 movie items ahead)
 //zuix.lazyLoad(true, -500);
+
 // Turn off debug output
 window.zuixNoConsoleOutput = true;
