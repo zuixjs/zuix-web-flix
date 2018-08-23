@@ -75,10 +75,13 @@ button.flat-btn i {
 
 .about-box {
     margin-top: 56px;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
     font-size: 140%;
     font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
     line-height: 160%;
+}
+.about-box p {
+    padding: 12px;
 }
 
 @media only screen and (min-device-width : 720px) {
