@@ -24,3 +24,8 @@ a {
     -o-user-select: none;
     user-select: none;
 }
+
+a, a:visited, a:hover {
+    color: darkorange;
+    text-decoration: none;
+}

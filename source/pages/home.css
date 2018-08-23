@@ -73,6 +73,14 @@ button.flat-btn i {
     opacity: 0.8;
 }
 
+.about-box {
+    margin-top: 56px;
+    margin-bottom: 56px;
+    font-size: 140%;
+    font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+    line-height: 160%;
+}
+
 @media only screen and (min-device-width : 720px) {
     .gallery {
         height: 231px;

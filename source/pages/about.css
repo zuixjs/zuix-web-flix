@@ -8,8 +8,3 @@
 h1 {
     color: darkgrey;
 }
-
-a, a:visited, a:hover {
-    color: darkorange;
-    text-decoration: none;
-}
