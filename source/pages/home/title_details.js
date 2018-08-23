@@ -1,17 +1,43 @@
 'use strict';
 zuix.controller(function(cp) {
     let headerBar;
+    let coverTitle;
     let headerTitle;
-    let currentOpacity = 0;
+    let scrollHelper;
     cp.create = function() {
         headerBar = cp.view('header');
-        headerTitle = headerBar.find('h1').hide();
+        coverTitle = cp.view('main').find('h1');
+        headerTitle = headerBar.find('h1');
         // register back button handler
         headerBar.find('button').on('click', hidePage);
-        // load scroll helper
+        // load scroll helper used for the cross-fading title/header effect
         zuix.load('@lib/controllers/scroll_helper', {
             view: cp.view('main'),
-            on: { 'scroll:change': syncHeader }
+            on: {
+                'scroll:change': function(e, data) {
+                    // make header transparent on top of page and cover title visible
+                    if (data.event === 'hit-top') {
+                        headerBar.css('background-color', 'rgba(33,33,33,0)');
+                        headerTitle.css('opacity', 0);
+                        coverTitle.css('opacity', 1);
+                    }
+                }
+            },
+            ready: function() {
+                scrollHelper = this;
+                // watch elements with .watchable class (the title)
+                this.watch('.watchable', function(el, data) {
+                    // synchronize header opacity with cover title position
+                    if (data.frame.dy < 0.3) {
+                        const opacity = (data.frame.dy/0.3);
+                        coverTitle.css('opacity', data.frame.dy/0.3);
+                        headerBar.css('background-color', 'rgba(33,33,33,' + (1-opacity) + ')');
+                    }
+                    if (data.frame.dy < 0.125) {
+                        headerTitle.css('opacity', 1-(data.frame.dy/0.1));
+                    }
+                });
+            }
         });
         // hide on startup
         cp.view().hide();
@@ -24,6 +50,8 @@ zuix.controller(function(cp) {
         window.location.href = "#details";
         // show details page
         cp.view().show();
+        // go to top of page
+        scrollHelper.scrollStart();
         // this is a work-around otherwise animation would not start
         // any suggestion for a better solution is welcome =)
         setTimeout(function(){
@@ -42,20 +70,7 @@ zuix.controller(function(cp) {
             .one('transitionend', function(){
                 cp.view().hide();
             });
-    }
-    function syncHeader(e, data) {
-        // synchronize header bar transparency
-        const coverHeight = data.info.viewport.height*0.4;
-        let headerOpacity = -data.info.viewport.y / coverHeight;
-        if (headerOpacity > 1) headerOpacity = 1;
-        if (headerOpacity !== currentOpacity) {
-            currentOpacity = headerOpacity;
-            headerBar.css('background-color', 'rgba(33,33,33,' + headerOpacity + ')');
-        }
-        if (-data.info.viewport.y > coverHeight && headerTitle.display() === 'none') {
-            headerTitle.show();
-        } else if (-data.info.viewport.y < coverHeight && headerTitle.display() !== 'none') {
-            headerTitle.hide();
-        }
+        // fire 'hide' event
+        cp.trigger('page:hide');
     }
 });
