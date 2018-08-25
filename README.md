@@ -1,12 +1,12 @@
 # zuix-web-flix
 
-A Progressive Web App template inspired by NetFlix mobile app.
+A Progressive Web App template inspired by Netflix mobile app.
 
 This template is built with just HTML, JavaScript and CSS so that it can be eventually integrated with your favourite development environment and build tools.
 
 ## Features
 
-- Design inspired to NetFlix mobile app
+- Design inspired to Netflix mobile app
 - Modular and component-based structure using zUIx.js
 - In-browser bundler: can pack all resources in a single file and boost-up loading speed
 - PWA LightHouse score 100/100 (!)
