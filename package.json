@@ -17,10 +17,10 @@
   "author": "G-Labs",
   "contributors": [],
   "license": "MIT",
-  "homepage": "https://github.com/genielabs",
+  "homepage": "https://github.com/zuixjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/genielabs/zuix-web-flix"
+    "url": "https://github.com/zuixjs/zuix-web-flix"
   },
   "devDependencies": {
     "http-server": "^0.11.1"
