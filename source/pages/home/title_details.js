@@ -16,10 +16,21 @@ zuix.controller(function(cp) {
             on: {
                 'scroll:change': function(e, data) {
                     // make header transparent on top of page and cover title visible
-                    if (data.event === 'hit-top') {
-                        headerBar.css('background-color', 'rgba(33,33,33,0)');
-                        headerTitle.css('opacity', 0);
-                        coverTitle.css('opacity', 1);
+                    switch (data.event) {
+                        case 'hit-top':
+                            headerBar.css('background-color', 'rgba(33,33,33,0)');
+                            headerTitle.css('opacity', 0);
+                            coverTitle.css('opacity', 1);
+                            cp.field('cover')
+                                .css('background-position-y', 0);
+                            break;
+                        case 'scroll':
+                            const viewport = data.info.viewport;
+                            if (viewport.y > -viewport.height / 2.5) {
+                                cp.field('cover')
+                                    .css('background-position-y', -(viewport.y/5)+'px');
+                            }
+                            break;
                     }
                 }
             },

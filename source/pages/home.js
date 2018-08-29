@@ -46,8 +46,8 @@ zuix.controller(function(cp) {
         let opacity = 1;
         if (data.event === 'hit-top') {
             opacity = 0;
-        } else if (-data.info.viewport.y < data.info.viewport.height / 1.5) {
-            opacity = -data.info.viewport.y / (data.info.viewport.height / 1.5);
+        } else if (-data.info.viewport.y < data.info.viewport.height) {
+            opacity = -data.info.viewport.y / (data.info.viewport.height);
         }
         if (opacity !== headerOpacity) {
             zuix.field('header-bar')

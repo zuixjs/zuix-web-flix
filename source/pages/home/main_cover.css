@@ -3,12 +3,12 @@
     margin-left: auto;
     margin-right: auto;
     height: 90vh;
-    background-image: linear-gradient(to bottom, rgba(0,0,0, 0.25), transparent 20%, transparent 80%, rgba(0,0,0, 0.25) 90%);
+    background-image: linear-gradient(to bottom, rgba(0,0,0, 0.3), transparent 20%, transparent 80%, rgba(0,0,0, 0.3) 90%);
 }
 .cover {
     height: 90vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
-    transition: transform 150ms ease;
+    /*transition: transform 150ms ease;*/
 }
