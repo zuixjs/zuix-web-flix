@@ -27,6 +27,10 @@ window.options = {
     },
     detailsPage: {
         lazyLoad: false,
+        on: {
+            'page:show': function() { bodyScrollEnable(false); },
+            'page:hide': function() { bodyScrollEnable(true); }
+        },
         ready: function() {
             detailsPage = this;
         }
@@ -97,6 +101,12 @@ function showPage(i) {
             .children().hide()
             .eq(i).show();
     }
+}
+
+function bodyScrollEnable(enable) {
+    const body = zuix.$(document.body);
+    if (enable === false) body.addClass('noscroll');
+    else body.removeClass('noscroll');
 }
 
 // increase lazy-load hit area up to

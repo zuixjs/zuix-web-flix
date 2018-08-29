@@ -3,6 +3,7 @@
     z-index: 200;
     top: 0; left: 100vh;
     transition: left .2s ease-in-out;
+    touch-action: none;
     width: 100vw;
     min-height: 100vh;
     background: #101010;

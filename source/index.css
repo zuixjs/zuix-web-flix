@@ -29,3 +29,7 @@ a, a:visited, a:hover {
     color: darkorange;
     text-decoration: none;
 }
+
+.noscroll {
+    overflow: hidden;
+}
