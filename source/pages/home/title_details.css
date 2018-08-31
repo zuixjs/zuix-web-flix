@@ -35,10 +35,10 @@ header button i {
 }
 header h1 {
     position: absolute;
-    top: 12px;
-    left: 64px;
+    top: 14px;
+    left: 56px;
     margin: 0;
-    font-size: 180%;
+    font-size: 160%;
 }
 
 main {
@@ -97,4 +97,14 @@ h2 {
 }
 [data-ui-field="vote"] {
     color: white;
+}
+
+@media only screen and (min-device-width : 720px) {
+    [data-ui-field="overview"] {
+        font-size: 140%;
+        line-height: 180%;
+    }
+    .cover h1 {
+        font-size: 220%;
+    }
 }

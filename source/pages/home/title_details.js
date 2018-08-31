@@ -39,13 +39,17 @@ zuix.controller(function(cp) {
                 // watch elements with .watchable class (the title)
                 this.watch('.watchable', function(el, data) {
                     // synchronize header opacity with cover title position
+                    const opacity = (data.frame.dy/0.3);
                     if (data.frame.dy < 0.3) {
-                        const opacity = (data.frame.dy/0.3);
-                        coverTitle.css('opacity', data.frame.dy/0.3);
-                        headerBar.css('background-color', 'rgba(33,33,33,' + (1-opacity) + ')');
+                        if (data.frame.dy > -0.3) {
+                            coverTitle.css('opacity', opacity+0.5);
+                        }
+                        if (-opacity > 0.1) {
+                            headerBar.css('background-color', 'rgba(33,33,33,' + (-opacity) + ')');
+                        }
                     }
                     if (data.frame.dy < 0.125) {
-                        headerTitle.css('opacity', 1-(data.frame.dy/0.1));
+                        headerTitle.css('opacity', -opacity);
                     }
                 });
             }
