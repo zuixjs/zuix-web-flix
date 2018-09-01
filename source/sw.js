@@ -1,21 +1,104 @@
-self.addEventListener('install', e => {
-    e.waitUntil(
-        caches.open('app-cache').then(cache =>
-        {
-            return cache.addAll([
-                'app.bundle.js',
-                'index.html',
-                'index.js',
-                'sw.js'
-            ])
-        })
-    )
-});
+// TODO: increase `bundleVersion` to force cache update on a new release
+const bundleVersion = 'v1.0.0';
 
-self.addEventListener('fetch', e => {
-    e.respondWith(
-        caches.match(e.request).then(response => {
-            return response || fetch(e.request);
-        })
+const config = {
+    cacheRemote: true,
+    version: bundleVersion+'::',
+    preCachingItems: [
+        'app.bundle.js',
+        'index.html',
+        'index.js',
+        'offline.html',
+        'images/offline.png',
+        '404.html',
+        'sw.js'
+    ],
+    blacklistCacheItems: [
+        'service-worker.js'
+    ],
+    offlineImage: 'images/offline.png',
+    offlinePage: 'offline.html',
+    notFoundPage: '404.html'
+};
+
+function cacheName(key, opts) {
+    return `${opts.version}${key}`;
+}
+
+function addToCache(cacheKey, request, response) {
+    if (response.ok) {
+        const copy = response.clone();
+        caches.open(cacheKey).then(cache => {
+            cache.put(request, copy);
+        });
+    }
+    return response;
+}
+
+function fetchFromCache(event) {
+    return caches.match(event.request).then(response => {
+        if (!response) {
+            throw Error(`${event.request.url} not found in cache`);
+        } else if (response.status === 404) {
+            return caches.match(options.notFoundPage);
+        }
+        return response;
+    });
+}
+
+function offlineResponse(resourceType, opts) {
+    if (resourceType === 'content') {
+        return caches.match(opts.offlinePage);
+    } else if (resourceType === 'image') {
+        return caches.match(opts.offlineImage);
+    }
+    return undefined;
+}
+
+self.addEventListener('install', event => {
+    event.waitUntil(caches.open(
+            cacheName('static', config)
+        )
+        .then(cache => cache.addAll(config.preCachingItems))
+        .then(() => self.skipWaiting())
+    );
+});
+self.addEventListener('activate', event => {
+    function clearCacheIfDifferent(event, opts) {
+        return caches.keys().then(cacheKeys => {
+            const oldCacheKeys = cacheKeys.filter(key => key.indexOf(opts.version) !== 0);
+            const deletePromises = oldCacheKeys.map(oldKey => caches.delete(oldKey));
+            return Promise.all(deletePromises);
+        });
+    }
+    event.waitUntil(
+        clearCacheIfDifferent(event, config)
+            .then(() => self.clients.claim())
+    );
+});
+self.addEventListener('fetch', event => {
+    const request = event.request;
+    const acceptHeader = request.headers.get('Accept');
+    const url = new URL(request.url);
+    let resourceType = 'content';
+    let cacheKey;
+    if (request.method !== 'GET'
+        || (config.cacheRemote !== true && url.origin !== self.location.origin)
+        || (config.blacklistCacheItems.length > 0 && config.blacklistCacheItems.indexOf(url.pathname) !== -1)) {
+        // default browser behavior
+        return;
+    }
+    if (acceptHeader.indexOf('text/') !== -1 || acceptHeader.indexOf('application/') !== -1) {
+        resourceType = 'content';
+    } else if (acceptHeader.indexOf('image/') !== -1) {
+        resourceType = 'image';
+    }
+    cacheKey = cacheName(resourceType, config);
+    // Cache first
+    event.respondWith(
+        fetchFromCache(event)
+            .catch(() => fetch(request).catch(() => offlineResponse(resourceType, config)))
+            .then(response => addToCache(cacheKey, request, response))
+            .catch(() => offlineResponse(resourceType, config))
     );
 });

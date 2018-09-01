@@ -1,4 +1,3 @@
-/* global zuix */
 'use strict';
 
 let currentPage;
