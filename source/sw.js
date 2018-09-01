@@ -39,7 +39,7 @@ function fetchFromCache(event) {
         if (!response) {
             throw Error(`${event.request.url} not found in cache`);
         } else if (response.status === 404) {
-            return caches.match(options.notFoundPage);
+            return caches.match(config.notFoundPage);
         }
         return response;
     });
@@ -48,7 +48,8 @@ function fetchFromCache(event) {
 function offlineResponse(resourceType, opts) {
     if (resourceType === 'content') {
         return caches.match(opts.offlinePage);
-    } else if (resourceType === 'image') {
+    }
+    if (resourceType === 'image') {
         return new Response(
             opts.offlineImage,
             {
