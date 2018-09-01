@@ -1,11 +1,11 @@
 // TODO: increase `bundleVersion` to force cache update on a new release
-const version = 'v1';
+const version = 'v2';
 
 const config = {
     cacheRemote: true,
     version: version+'::',
     preCachingItems: [
-        'app.bundle.js',
+        //'app.bundle.js',
         'index.html',
         'index.js',
         'offline.html',
@@ -13,11 +13,23 @@ const config = {
         'sw.js'
     ],
     blacklistCacheItems: [
+        'index.html',
         'service-worker.js'
     ],
-    offlineImage: '<svg role="img" aria-labelledby="offline-title"\' + \' viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">\' + \'<title id="offline-title">Offline</title>\' + \'<g fill="none" fill-rule="evenodd"><path fill="#121212" d="M0 0h400v300H0z"/>\' + \'<text fill="#fff" font-family="Times New Roman,Times,serif" font-size="72" font-weight="bold">\' + \'<tspan x="93" y="172">offline</tspan></text></g></svg>',
+    offlineImage: '<svg role="img" aria-labelledby="offline-title"' + ' viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">' + '<title id="offline-title">Offline</title>' + '<g fill="none" fill-rule="evenodd"><path fill="#121212" d="M0 0h400v300H0z"/>' + '<text fill="#aaa" font-family="monospace" font-size="32" font-weight="bold">' + '<tspan x="136" y="156">offline</tspan></text></g></svg>',
     offlinePage: 'offline.html',
-    notFoundPage: '404.html'
+    notFoundPage: '404.html',
+    offlineTmdbResults: {
+        page: 1,
+        results: [{
+            "title": "Offline",
+            "poster_path": "https://tmdb.org/offline.jpg",
+            "backdrop_path": "https://tmdb.org/offline.jpg",
+            "overview": ""
+        }],
+        total_pages: 1,
+        total_results: 1
+    }
 };
 
 function cacheName(key, opts) {
@@ -50,12 +62,14 @@ function offlineResponse(resourceType, opts) {
         return caches.match(opts.offlinePage);
     }
     if (resourceType === 'image') {
-        return new Response(
-            opts.offlineImage,
-            {
-                headers: { 'Content-Type': 'image/svg+xml' }
-            }
-        );
+        return new Response(opts.offlineImage, {
+           headers: { 'Content-Type': 'image/svg+xml' }
+        });
+    }
+    if (resourceType === 'tmdb') {
+        return new Response(JSON.stringify(opts.offlineTmdbResults), {
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
     return undefined;
 }
@@ -83,17 +97,22 @@ self.addEventListener('activate', event => {
 });
 self.addEventListener('fetch', event => {
     const request = event.request;
+    const url = new URL(request.url);
     if (request.method !== 'GET'
         || (config.cacheRemote !== true && url.origin !== self.location.origin)
         || (config.blacklistCacheItems.length > 0 && config.blacklistCacheItems.indexOf(url.pathname) !== -1)) {
         // default browser behavior
         return;
     }
-    const url = new URL(request.url);
     let cacheKey;
     let resourceType = 'content';
     if (/(.jpg|.jpeg|.webp|.png|.svg|.gif)$/.test(url.pathname)) {
         resourceType = 'image';
+    } else if (/.\/fonts.(?:googleapis|gstatic).com/.test(url.origin)) {
+        resourceType = 'font';
+    } else if (url.origin === 'https://api.themoviedb.org') {
+        // The Movie DB json API
+        resourceType = 'tmdb';
     }
     cacheKey = cacheName(resourceType, config);
     if (resourceType === 'content') {

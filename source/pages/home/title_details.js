@@ -44,7 +44,7 @@ zuix.controller(function(cp) {
                         if (data.frame.dy > -0.3) {
                             coverTitle.css('opacity', opacity+0.5);
                         }
-                        if (-opacity > 0.1) {
+                        if (-opacity >= 0) {
                             headerBar.css('background-color', 'rgba(33,33,33,' + (-opacity) + ')');
                         }
                     }
