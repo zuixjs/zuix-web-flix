@@ -1,11 +1,11 @@
 // TODO: increase `bundleVersion` to force cache update on a new release
-const bundleVersion = 'v1';
+const version = 'v1';
 
 const config = {
     cacheRemote: true,
-    version: bundleVersion+'::',
+    version: version+'::',
     preCachingItems: [
-        'app.bundle.js',
+        //'app.bundle.js',
         'index.html',
         'index.js',
         'offline.html',
@@ -62,10 +62,10 @@ function offlineResponse(resourceType, opts) {
 
 self.addEventListener('install', event => {
     event.waitUntil(caches.open(
-            cacheName('static', config)
+        cacheName('static', config)
         )
-        .then(cache => cache.addAll(config.preCachingItems))
-        .then(() => self.skipWaiting())
+            .then(cache => cache.addAll(config.preCachingItems))
+            .then(() => self.skipWaiting())
     );
 });
 self.addEventListener('activate', event => {
@@ -83,27 +83,34 @@ self.addEventListener('activate', event => {
 });
 self.addEventListener('fetch', event => {
     const request = event.request;
-    const acceptHeader = request.headers.get('Accept');
-    const url = new URL(request.url);
-    let resourceType = 'content';
-    let cacheKey;
     if (request.method !== 'GET'
         || (config.cacheRemote !== true && url.origin !== self.location.origin)
         || (config.blacklistCacheItems.length > 0 && config.blacklistCacheItems.indexOf(url.pathname) !== -1)) {
         // default browser behavior
         return;
     }
-    if (acceptHeader.indexOf('text/') !== -1 || acceptHeader.indexOf('application/') !== -1) {
-        resourceType = 'content';
-    } else if (acceptHeader.indexOf('image/') !== -1) {
+    const url = new URL(request.url);
+    let cacheKey;
+    let resourceType = 'content';
+    if (/(.jpg|.jpeg|.webp|.png|.svg|.gif)$/.test(url.pathname)) {
         resourceType = 'image';
     }
     cacheKey = cacheName(resourceType, config);
-    // Cache first
-    event.respondWith(
-        fetchFromCache(event)
-            .catch(() => fetch(request).catch(() => offlineResponse(resourceType, config)))
-            .then(response => addToCache(cacheKey, request, response))
-            .catch(() => offlineResponse(resourceType, config))
-    );
+    if (resourceType === 'content') {
+        // Network First Strategy
+        event.respondWith(
+            fetch(request)
+                .then(response => addToCache(cacheKey, request, response))
+                .catch(() => fetchFromCache(event))
+                .catch(() => offlineResponse(resourceType, config))
+        );
+    } else {
+        // Cache First Strategy
+        event.respondWith(
+            fetchFromCache(event)
+                .catch(() => fetch(request))
+                .then(response => addToCache(cacheKey, request, response))
+                .catch(() => offlineResponse(resourceType, config))
+        );
+    }
 });
