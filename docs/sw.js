@@ -1,5 +1,5 @@
 // TODO: increase `bundleVersion` to force cache update on a new release
-const bundleVersion = 'v1.0.0';
+const bundleVersion = 'v1';
 
 const config = {
     cacheRemote: true,
@@ -16,7 +16,7 @@ const config = {
     blacklistCacheItems: [
         'service-worker.js'
     ],
-    offlineImage: 'images/offline.png',
+    offlineImage: '<svg role="img" aria-labelledby="offline-title"\' + \' viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">\' + \'<title id="offline-title">Offline</title>\' + \'<g fill="none" fill-rule="evenodd"><path fill="#121212" d="M0 0h400v300H0z"/>\' + \'<text fill="#fff" font-family="Times New Roman,Times,serif" font-size="72" font-weight="bold">\' + \'<tspan x="93" y="172">offline</tspan></text></g></svg>',
     offlinePage: 'offline.html',
     notFoundPage: '404.html'
 };
@@ -50,17 +50,22 @@ function offlineResponse(resourceType, opts) {
     if (resourceType === 'content') {
         return caches.match(opts.offlinePage);
     } else if (resourceType === 'image') {
-        return caches.match(opts.offlineImage);
+        return new Response(
+            opts.offlineImage,
+            {
+                headers: { 'Content-Type': 'image/svg+xml' }
+            }
+        );
     }
     return undefined;
 }
 
 self.addEventListener('install', event => {
     event.waitUntil(caches.open(
-            cacheName('static', config)
+        cacheName('static', config)
         )
-        .then(cache => cache.addAll(config.preCachingItems))
-        .then(() => self.skipWaiting())
+            .then(cache => cache.addAll(config.preCachingItems))
+            .then(() => self.skipWaiting())
     );
 });
 self.addEventListener('activate', event => {
