@@ -9,7 +9,6 @@ const config = {
         'index.html',
         'index.js',
         'offline.html',
-        'images/offline.png',
         '404.html',
         'sw.js'
     ],
