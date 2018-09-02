@@ -1,4 +1,4 @@
-// TODO: increase `bundleVersion` to force cache update on a new release
+// TODO: increase `version` number to force cache update when publishing a new release
 const version = 'v2';
 
 const config = {
