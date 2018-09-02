@@ -5,7 +5,7 @@ const config = {
     cacheRemote: true,
     version: version+'::',
     preCachingItems: [
-        //'app.bundle.js',
+        'app.bundle.js',
         'index.html',
         'index.js',
         'offline.html',
